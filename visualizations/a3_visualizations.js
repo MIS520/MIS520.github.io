@@ -27,25 +27,36 @@ fetchData()
           { field: "Global_Sales", type: "quantitative", aggregate: "sum", title: "Sum Global Sales" },
         ])
       )
-      .width("container")
+      .width(900)
       .height(380)
       .toSpec();
 
-    // V2: markRect, avg Global sales by Platform, colored by Genre
     const v2 = vl
-      .markRect()
+      .markLine({ point: true })
       .data(data)
+      .transform(
+        vl.filter(
+          'indexof(["X360","Wii","PS2"], datum.Platform) != -1 && indexof(["Action","Sports"], datum.Genre) != -1'
+        )
+      )
       .encode(
-        vl.y().fieldN("Platform").sort("-x").title("Platform"),
-        vl.x().fieldQ("Global_Sales").aggregate("average").title("Average Global Sales (M)"),
-        vl.color().fieldN("Genre").title("Genre"),
+        vl.x().fieldQ("Year").title("Year"),
+        vl.y().fieldQ("Global_Sales").aggregate("sum").title("Total Global Sales (M)"),
+        vl.color().fieldN("Platform").title("Platform"),
+        vl.shape().fieldN("Genre").title("Genre"),
+
+        // ensures separate series for each Platform+Genre combo
+        vl.detail().fieldN("Platform"),
+        vl.detail().fieldN("Genre"),
+
         vl.tooltip([
+          { field: "Year", type: "quantitative" },
           { field: "Platform", type: "nominal" },
           { field: "Genre", type: "nominal" },
-          { field: "Global_Sales", type: "quantitative", aggregate: "average", title: "Avg Global Sales (M)" },
+          { field: "Global_Sales", type: "quantitative", aggregate: "sum", title: "Total Global Sales (M)" },
         ])
       )
-      .width("container")
+      .width(900)
       .height(420)
       .toSpec();
 
@@ -65,7 +76,7 @@ fetchData()
           { field: "JP_Sales", type: "quantitative", aggregate: "average", title: "Avg JP" },
         ])
       )
-      .width("container")
+      .width(900)
       .height(420)
       .toSpec();
 
@@ -84,7 +95,7 @@ fetchData()
           { field: "Global_Sales", type: "quantitative", aggregate: "sum", title: "Total Shooter Sales (M)" },
         ])
       )
-      .width("container")
+      .width(900)
       .height(420)
       .toSpec();
 
@@ -98,6 +109,7 @@ fetchData()
   });
 
 async function render(viewID, spec) {
+  // if you want responsive later, we can switch width 900 -> container + autosize
   const result = await vegaEmbed(viewID, spec, { actions: false });
   result.view.run();
 }
