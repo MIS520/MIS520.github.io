@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    font-family: Faustina, serif;
+    font-family: "Prata", serif;
     background: -webkit-linear-gradient(90deg,rgb(96, 47, 124) 0%, rgb(183, 97, 164) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -24,7 +24,7 @@ main {
 }
 
 h3 {
-    font-family: Faustina, serif;
+    font-family: "Prata", serif;
 }
 
 a:link {

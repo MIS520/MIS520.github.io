@@ -1,0 +1,81 @@
+<!-- based on medhi's test-visualization file -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite-api@5.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-tooltip"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link rel="stylesheet" href="vis_style.css" />
+    <script>
+      const options = {
+        config: {
+          // Vega-Lite default configuration
+        },
+        init: (view) => {
+          // initialize tooltip handler
+          view.tooltip(new vegaTooltip.Handler().call);
+        },
+        view: {
+          loader: vega.loader({
+            baseURL: "https://cdn.jsdelivr.net/npm/vega-datasets@2/",
+          }),
+          renderer: "canvas",
+        },
+      };
+
+      // register vega and vega-lite with the API
+      vl.register(vega, vegaLite, options);
+    </script>
+    <style></style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Video Game Visualizations</h1>
+      <h2>V1: Global Sales by Genre and Platform</h2>
+      <h3>Which genres generate the highest total global sales across all platforms? Are certain platforms especially strong for specific genres?</h3>
+      <div class="listText">
+        <ul>
+        <li>Action, Sports, and Shooter clearly dominate total sales across most platforms.</li>
+        <li>PS2, PS3, Wii, and Xbox platforms show consistently larger bubbles across many genres.</li>
+        <li>Some genres like Strategy and Puzzle are much smaller overall and do not dominate on any platform.</li>
+        </ul>
+      </div>
+      <div class="chart" id="view"></div>
+      <h2>V2: Sales Over Time by Platform and Genre</h2>
+      <h3>How have average global sales changed across different console generations? Which platforms had the strongest peak performance over time?</h3>
+      <div class="listText">
+        <ul>
+        <li>Older consoles like NES and SNES had strong average sales, likely because fewer games but higher impact titles.</li>
+        <li>PS2 and Xbox 360 era shows a big expansion in sales activity across multiple genres.</li>
+        <li>Newer consoles seem more fragmented, with sales spread across more genres instead of one genre dominating.</li>
+        </ul>
+      </div>
+      <div class="chart" id="view2"></div>
+      <h2>V3: Regional Sales vs. Platform</h2>
+      <h3>Which platforms are strongest in North America compared to Europe and Japan? Do certain consoles show clear regional preference patterns?</h3>
+      <div class="listText">
+        <ul>
+        <li>Xbox platforms perform much stronger in North America compared to Japan.</li>
+        <li>PlayStation platforms are more balanced across NA and EU.</li>
+        <li>Nintendo consoles tend to show stronger relative presence in Japan compared to Xbox.</li>
+        </ul>
+      </div>
+      <div class="chart" id="view3"></div>
+      <h2>V4: Special Inquiry</h2>
+      <h3>How has the Shooter genre evolved in total sales over time? Which platforms contributed most to the rise of Shooter games?</h3>
+      <div class="listText">
+        <ul>
+        <li>Shooter sales spike heavily during the PS3 and Xbox 360 era.</li>
+        <li>Xbox 360 especially stands out as a major driver of Shooter popularity.</li>
+        <li>Shooter sales decline slightly in later years, suggesting market saturation or genre shift.</li>
+        </ul>
+      </div>
+      <div class="chart" id="view4"></div>
+    </div>
+    <script src="./a3_visualizations.js"></script>
+  </body>
+</html>
