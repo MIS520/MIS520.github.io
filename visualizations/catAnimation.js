@@ -15,7 +15,7 @@ async function prepareVis() {
     .append("svg")
     .attr("width", width)
     .attr("height", height)
-    .style("background", "lightyellow");
+    .style("background", "white");
 
   svg.append("text")
     .attr("id", "hint")
